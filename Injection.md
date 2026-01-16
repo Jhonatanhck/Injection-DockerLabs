@@ -23,7 +23,7 @@ Al poner `admin:admin` nos indica "credenciales incorrectas", así que por el no
 
 Estaré usando este *payload* en el campo de usuario y en el campo de contraseña pondré cualquier cosa.
 
-![Credenciales SSH encontradas](images/Pasted%20image%2020260116175225.png)
+![Credenciales SSH encontradas](images/blur.png)
 *(Recuerda aplicar blur a las credenciales en esta imagen antes de subirla)*
 
 ¡Ya estamos dentro! Aquí tenemos las posibles credenciales para conectarnos por SSH.
