@@ -1,39 +1,54 @@
 
-Maquina
-![[Pasted image 20260116174803.png]]
-lo primero que tenemos que hacer es desplegar la maquina para empezar a operar 
+# Máquina
 
-Reconocimiento
-![[Pasted image 20260116174853.png]]
-Obtenemos esto del escaneo de nmap, pasare con la enumeracion de la pagina por que el servicio ssh no es vulnerable 
+![Despliegue de la máquina](images/Pasted%20image%2020260116174803.png)
 
-![[Pasted image 20260116175010.png]]
-En la pagina nos encontramos con este login
+Lo primero que tenemos que hacer es desplegar la máquina para empezar a operar.
 
-![[Pasted image 20260116175042.png]]
-al poner admin admin nos pone credenciales incorrectas, asi que por el nombre de la maquina intuyo que tendremos que hacer SQLI
+## Reconocimiento
 
-![[Pasted image 20260116175144.png]]
-Estare usando este payload en el campo de user y en el campo de password pondre lo que sea
+![Escaneo de Nmap](images/Pasted%20image%2020260116174853.png)
 
-![[Pasted image 20260116175225.png]]
-Ya estamos dentro, aqui tenemos las posibles credenciales para ssh
+Obtenemos esto del escaneo de Nmap. Pasaré con la enumeración de la página web porque el servicio SSH no parece vulnerable a simple vista.
 
-![[Pasted image 20260116175720.png]]
-Estamos dentro de la maquina, ahora toca enumerar para ver de que manera podemos escalar privilegios
+![Login Page](images/Pasted%20image%2020260116175010.png)
 
-![[Pasted image 20260116175823.png]]
-buscando por binarios SUID encontre env,
+En la página nos encontramos con este panel de login.
 
-![[Pasted image 20260116175953.png]]
-Gracias a este recurso pude ver una manera de escalar mis privilegios si tenemos permisos SUID en el binario, aqui esta el link : https://gtfobins.github.io/gtfobins/env/
+![Intento de credenciales](images/Pasted%20image%2020260116175042.png)
 
-![[Pasted image 20260116180100.png]]
-nos copiamos el comando y lo ejecutamos 
+Al poner `admin:admin` nos indica "credenciales incorrectas", así que por el nombre de la máquina intuyo que tendremos que intentar una SQL Injection (SQLI).
 
+![Payload SQLI](images/Pasted%20image%2020260116175144.png)
 
-![[Pasted image 20260116180150.png]]
-y asi llegamos a ser root
+Estaré usando este *payload* en el campo de usuario y en el campo de contraseña pondré cualquier cosa.
+
+![Credenciales SSH encontradas](images/Pasted%20image%2020260116175225.png)
+*(Recuerda aplicar blur a las credenciales en esta imagen antes de subirla)*
+
+¡Ya estamos dentro! Aquí tenemos las posibles credenciales para conectarnos por SSH.
+
+## Escalada de Privilegios
+
+![Acceso SSH](images/Pasted%20image%2020260116175720.png)
+
+Estamos dentro de la máquina. Ahora toca enumerar para ver de qué manera podemos escalar privilegios.
+
+![Búsqueda de binarios SUID](images/Pasted%20image%2020260116175823.png)
+
+Buscando por binarios SUID encontré `env`.
+
+![GTFOBins env](images/Pasted%20image%2020260116175953.png)
+
+Gracias a este recurso pude ver una manera de escalar mis privilegios si tenemos permisos SUID en el binario. Aquí está el link: [GTFOBins - env](https://gtfobins.github.io/gtfobins/env/)
+
+![Ejecución del exploit](images/Pasted%20image%2020260116180100.png)
+
+Nos copiamos el comando y lo ejecutamos.
+
+![Acceso Root](images/Pasted%20image%2020260116180150.png)
+
+Y así llegamos a ser **root**.
 
 
 
